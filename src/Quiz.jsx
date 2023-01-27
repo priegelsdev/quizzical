@@ -62,7 +62,7 @@ export default function Quiz(props) {
   const [answers, setAnswers] = useState(answerArray)
 
   //
-  const answerElements = answers.map(answer => {
+  const answerElements = answers.map(answer => {    
     const styles = {border: "none", backgroundColor: '#D6DBF5'}
 
     return <span 

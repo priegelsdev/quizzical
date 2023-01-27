@@ -10,6 +10,7 @@ export default function App() {
   // states to start game and set questions from the api
   const [gameStart, setGameStart] = useState(false)
   const [questions, setQuestions] = useState([])
+  const [showAnswers, setShowAnswers] = useState(false)
 
   // start game function
   function startGame() {
@@ -19,6 +20,7 @@ export default function App() {
   // function to check answers and display score + other button
   function checkAnswers() {
     console.log('answers shown')
+    setShowAnswers(prevState => !prevState)
   }
 
   // effect to fetch questions from api on game start
@@ -40,6 +42,7 @@ export default function App() {
           question={question.question}
           incorrectAnswers={question.incorrect_answers}
           correctAnswer={question.correct_answer}
+          showAnswers={showAnswers}
         />
         {index === questions.length - 1 && (
           <button className="check-btn" onClick={checkAnswers} >Check answers</button>
