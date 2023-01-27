@@ -1,26 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import Question from './Question'
+import {useState, useEffect} from 'react'
+import Question from './Answer'
 
 export default function Quiz(props) {
 
-  const questionElements = props.questions.map(question => {
-    return (
-      <React.Fragment key={index}>
-      <Question
-        key={crypto.randomUUID()}
-        question={question.question}
-        incorrectAnswers={question.incorrect_answers}
-        correctAnswer={question.correct_answer}
-        showAnswers={showAnswers}
-      />
-      {index === questions.length - 1 && (
-        <button className="check-btn" onClick={checkAnswers} >Check answers</button>
-      )}
-    </React.Fragment>
-    )
-  })
-
-  // function where is logged property gets toggled while only one can be toggled at a time
+// function where is logged property gets toggled while only one can be toggled at a time
   function toggleAnswer(id) {
     setAnswers(prevState => {
       const newAnswersArray = []
@@ -42,8 +25,8 @@ export default function Quiz(props) {
     })
   }
 
-   // helper function to shuffle array of answers
-   function shuffle(array) {
+  // helper function to shuffle array of answers
+  function shuffle(array) {
     for (let i = array.length -1; i > 0; i--) {
       let j = Math.floor(Math.random() * i)
       let k = array[i]
@@ -87,7 +70,7 @@ export default function Quiz(props) {
   const answerElements = answers.map(answer => {    
     const styles = {border: "none", backgroundColor: '#D6DBF5'}
 
-    return <Answer 
+    return <Question 
 /*         className = {`answer ${answer.text === formattedCorrectAnswer ? 'correct' : 'wrong'}`} */
         className = "answer"
         key = {crypto.randomUUID()}
@@ -101,10 +84,12 @@ export default function Quiz(props) {
   )
 
   return (
-    <div className="questions-container">
-
+    <div className="question-container">
+      <h2 className="question-text">{formattedQuestion}</h2>
+      <div className="answers-container">
+        {answerElements}
+      </div>
+      <hr></hr>
     </div>
   )
 }
-
-

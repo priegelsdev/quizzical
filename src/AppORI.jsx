@@ -34,7 +34,7 @@ export default function App() {
   }, [gameStart])
  
   // question elements to be rendered on game start with additional button element
-  const questionElements2 = questions.map((question, index) => {
+  const questionElements = questions.map((question, index) => {
     return (
       <React.Fragment key={index}>
         <Quiz
@@ -51,16 +51,6 @@ export default function App() {
     );
   });
 
-/*   const questionElements = questions.map(question => {
-    return { 'key': crypto.randomUUID(),
-      'question': question.question,
-      'incorrectAnswers': question.incorrect_answers,
-      'correctAnswer': question.correct_answer,
-      'showAnswers': showAnswers
-    }
-  })
-  console.log(questionElements) */
-
   return (
     <main>
       <img className="blob-one" src={blobOne}/>
@@ -73,11 +63,9 @@ export default function App() {
       </div>}
 
       {/* render Game component on game start */}
-      {gameStart && <Quiz
-/*           questions = {questionElements}  */
-          questions = {questions}
-        />
-      }           
+      {gameStart && <div className="questions-container">
+        {questionElements}
+      </div>}           
 
       <img className="blob-two" src={blobTwo}/>
     </main>
