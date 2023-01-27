@@ -112,6 +112,10 @@ h2 {
   line-height: 1.2em;
 }
 
+.logged {
+  outline: 1px solid purple;
+}
+
 hr {
   background: #DBDEF0;
   height: 1px;

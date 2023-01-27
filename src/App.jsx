@@ -36,15 +36,17 @@ export default function App() {
     <main>
       <img className="blob-one" src={blobOne}/>
 
+      {/* render Intro component on page load */}
       {!gameStart && <div className="intro-container">
         <Intro 
           onClick={startGame}
         />
       </div>}
 
-      {gameStart && <div className="questions-container">{questionElements}</div>}
-            
-{/*       <button className="check-btn" >Check answers</button> */}
+      {/* render Game component on game start */}
+      {gameStart && <div className="questions-container">{questionElements}</div>}           
+      {gameStart && <button className="check-btn" >Check answers</button>}
+      
       <img className="blob-two" src={blobTwo}/>
     </main>
   )

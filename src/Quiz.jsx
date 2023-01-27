@@ -1,4 +1,29 @@
+import {useState, useEffect} from 'react'
+
 export default function Quiz(props) {
+
+// function where is logged property gets toggled while only one can be toggled at a time
+  function toggleAnswer(id) {
+    setAnswers(prevState => {
+      const newAnswersArray = []
+      for (let i = 0; i < prevState.length; i++) {
+        const currentAnswer = prevState[i]
+        if (currentAnswer.id === id) {
+          const updatedAnswer = {
+            ...currentAnswer,
+            isLogged: !currentAnswer.isLogged
+          }
+          newAnswersArray.push(updatedAnswer)
+        } else {
+          currentAnswer.isLogged = false
+          newAnswersArray.push(currentAnswer)
+        }
+      }
+      console.log(newAnswersArray)
+      return newAnswersArray
+    })
+  }
+
   // helper function to shuffle array of answers
   function shuffle(array) {
     for (let i = array.length -1; i > 0; i--) {
@@ -27,14 +52,28 @@ export default function Quiz(props) {
   allAnswers.push(formattedCorrectAnswer)
   const shuffledAnswers = shuffle(allAnswers)
 
-  const answerElements = shuffledAnswers.map(answer => {
+  const answerArray = shuffledAnswers.map(answer => ({
+    text: answer,
+    isLogged: false,
+    id: crypto.randomUUID()
+  }))
+
+  // state for answers
+  const [answers, setAnswers] = useState(answerArray)
+
+  const answerElements = answers.map(answer => {
+    const styles = {outline: "1px solid purple"}
+
     return <span 
         className = "answer"
-        key = {crypto.randomUUID()} 
-        onClick = {props.onClick}
+        key = {crypto.randomUUID()}
+        id = {crypto.randomUUID()}
+        onClick = {() => toggleAnswer(answer.id)}
+        style={answer.isLogged ? styles : {outline: "none"}}
+
   // this line belongs in Answer Component; here for testing purposes
   /*       className = {answer === props.correctAnswer ? 'correct' : 'wrong'} */
-        > {answer}
+        > {answer.text}
       </span>}
   )
 
