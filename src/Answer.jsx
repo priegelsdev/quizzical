@@ -9,8 +9,8 @@ export default function Answer(props) {
       className = "answer"
       key = {crypto.randomUUID()}
       id = {crypto.randomUUID()}
-      onClick = {() => toggleAnswer(props.id)}
-      style = {props.isLogged ? styles : {outline: 'none'}}
+      onClick = {props.onClick}
+      style = {props.style}
     > 
       {props.text}
     </span>

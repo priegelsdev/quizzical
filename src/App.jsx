@@ -10,17 +10,10 @@ export default function App() {
   // states to start game and set questions from the api
   const [gameStart, setGameStart] = useState(false)
   const [questions, setQuestions] = useState([])
-  const [showAnswers, setShowAnswers] = useState(false)
 
   // start game function
   function startGame() {
     setGameStart(prevState => !prevState)
-  }
-
-  // function to check answers and display score + other button
-  function checkAnswers() {
-    console.log('answers shown')
-    setShowAnswers(prevState => !prevState)
   }
 
   // effect to fetch questions from api on game start
@@ -32,34 +25,6 @@ export default function App() {
         setQuestions(data.results)
       })
   }, [gameStart])
- 
-  // question elements to be rendered on game start with additional button element
-  const questionElements2 = questions.map((question, index) => {
-    return (
-      <React.Fragment key={index}>
-        <Quiz
-          key={crypto.randomUUID()}
-          question={question.question}
-          incorrectAnswers={question.incorrect_answers}
-          correctAnswer={question.correct_answer}
-          showAnswers={showAnswers}
-        />
-        {index === questions.length - 1 && (
-          <button className="check-btn" onClick={checkAnswers} >Check answers</button>
-        )}
-      </React.Fragment>
-    );
-  });
-
-/*   const questionElements = questions.map(question => {
-    return { 'key': crypto.randomUUID(),
-      'question': question.question,
-      'incorrectAnswers': question.incorrect_answers,
-      'correctAnswer': question.correct_answer,
-      'showAnswers': showAnswers
-    }
-  })
-  console.log(questionElements) */
 
   return (
     <main>
@@ -74,10 +39,8 @@ export default function App() {
 
       {/* render Game component on game start */}
       {gameStart && <Quiz
-/*           questions = {questionElements}  */
-          questions = {questions}
-        />
-      }           
+        questions={questions}
+      />}           
 
       <img className="blob-two" src={blobTwo}/>
     </main>
