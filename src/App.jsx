@@ -12,8 +12,10 @@ export default function App() {
   const [questions, setQuestions] = useState([])
 
   // start game function
-  function startGame() {
-    setGameStart(prevState => !prevState)
+  function handleClick() {
+    if (!gameStart) {
+      setGameStart(true)
+    } 
   }
 
   // effect to fetch questions from api on game start
@@ -31,17 +33,13 @@ export default function App() {
       <img className="blob-one" src={blobOne}/>
 
       {/* render Intro component on page load */}
-      {!gameStart && <div className="intro-container">
-        <Intro 
-          onClick={startGame}
-        />
-      </div>}
+      {!gameStart && <Intro/>}
 
       {/* render Game component on game start */}
       {gameStart && <Quiz
         questions={questions}
       />}           
-
+      <button className="check-btn" onClick={handleClick}>Start Quiz</button>
       <img className="blob-two" src={blobTwo}/>
     </main>
   )

@@ -20,7 +20,6 @@ export default function Question(props) {
           newAnswersArray.push(currentAnswer)
         }
       }
-      console.log(newAnswersArray)
       return newAnswersArray
     })
   }
@@ -61,7 +60,6 @@ export default function Question(props) {
 
   // state for answers, so an isLogged property can be added to be toggled on and off when selected
   const [answers, setAnswers] = useState(answerArray)
-  const [showAnswers, setShowAnswer] = useState(false)
 
   const answerElements = answers.map(answer => {    
     const styles = {border: "none", backgroundColor: '#D6DBF5'}
@@ -74,7 +72,7 @@ export default function Question(props) {
         onClick = {() => toggleAnswer(answer.id)}
         style = {answer.isLogged ? styles : {outline: 'none'}}
         text = {answer.text}
-        showAnswers = {showAnswers}
+        showAnswer = {props.showAnswer}
         /> 
       }
   )
