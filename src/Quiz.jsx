@@ -62,17 +62,16 @@ export default function Quiz(props) {
   const [answers, setAnswers] = useState(answerArray)
 
   const answerElements = answers.map(answer => {
-    const styles = {border: "1px solid purple"}
+    const styles = {border: "none", backgroundColor: '#D6DBF5'}
 
     return <span 
-        className = {`answer ${answer.text === formattedCorrectAnswer ? 'correct' : 'wrong'}`}
+/*         className = {`answer ${answer.text === formattedCorrectAnswer ? 'correct' : 'wrong'}`} */
+        className = "answer"
         key = {crypto.randomUUID()}
         id = {crypto.randomUUID()}
         onClick = {() => toggleAnswer(answer.id)}
-        style={answer.isLogged ? styles : {border: "none"}}
+        style={answer.isLogged ? styles : {outline: 'none'}}
 
-  // this line belongs in Answer Component; here for testing purposes
-/*         className = {answer === props.correctAnswer ? 'correct' : 'wrong'} */
         > {answer.text}
       </span>}
   )
