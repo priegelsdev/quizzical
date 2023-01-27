@@ -55,6 +55,7 @@ export default function Question(props) {
   const answerArray = shuffledAnswers.map(answer => ({
     text: answer,
     isLogged: false,
+    isShown: false,
     id: crypto.randomUUID()
   }))
 

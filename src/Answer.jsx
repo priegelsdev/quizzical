@@ -1,9 +1,12 @@
+import {useState} from 'react'
+
 export default function Answer(props) {
   const styles = {}
 
 /*   const answerElements = answers.map(answer => {    
     const styles = {border: "none", backgroundColor: '#D6DBF5'} */
-  
+
+
   return (
     <span 
       className = "answer"

@@ -7,10 +7,11 @@ export default function Quiz(props) {
 
   // function to check answers or restart game
   function handleClick() {
-    if (!showAnswer) {
+    if (!showAnswers) {
       setShowAnswers(prevState => !prevState)
+      console.log(showAnswers)
     } else {
-
+      // logic to restart game; probably need to create one button to handle all state changes
     }
   }
 
@@ -31,6 +32,7 @@ export default function Quiz(props) {
       <div className="questions-container">
         {questionElements}
       </div>
+      <button className="check-btn" onClick={handleClick}>{showAnswers ? 'Restart game' : 'Check answers'}</button> 
     </>
   )
 }

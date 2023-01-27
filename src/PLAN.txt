@@ -1,0 +1,16 @@
+Page loads --> Intro component and button gets shown
+On Button click --> 
+  - Screen change to show Quiz page
+  - API fetches questions with answers; questions go into prev empty questions array
+  - questions get rendered as components to screen with 4 randomly shown answers 
+    (think up logic so they only get shuffled once) 
+    ^ shuffle has to happen only once as effect on questions dependency?
+  - button stays the same, but changes text
+  - answers change style on click and toggle custom isLogged property
+  
+On additional Button click --> 
+  - button changes text to 'Restart game'
+  - state changes to showAnswers --> different styling for answers 
+    - isLogged && correctAnswer --> 
+    - isLogged && wrongAnswer -->
+    - remaining answers 2 types correct and wrong
