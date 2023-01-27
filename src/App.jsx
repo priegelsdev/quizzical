@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import Intro from './Intro'
 import Quiz from './Quiz'
 import blobOne from './assets/img/blob1.png'
@@ -7,13 +7,21 @@ import blobTwo from './assets/img/blob2.png'
 
 export default function App() {
 
+  // states to start game and set questions from the api
   const [gameStart, setGameStart] = useState(false)
   const [questions, setQuestions] = useState([])
 
+  // start game function
   function startGame() {
     setGameStart(prevState => !prevState)
   }
 
+  // function to check answers and display score + other button
+  function checkAnswers() {
+    console.log('answers shown')
+  }
+
+  // effect to fetch questions from api on game start
   useEffect(() => {
     fetch('https://opentdb.com/api.php?amount=5&type=multiple')
       .then(res => res.json()) 
@@ -23,14 +31,22 @@ export default function App() {
       })
   }, [gameStart])
  
-  const questionElements = questions.map(question => {
-    return <Quiz
-      key={crypto.randomUUID()}
-      question={question.question}
-      incorrectAnswers={question.incorrect_answers}
-      correctAnswer={question.correct_answer}
-    />
-  })
+  // question elements to be rendered on game start with additional button element
+  const questionElements = questions.map((question, index) => {
+    return (
+      <React.Fragment key={index}>
+        <Quiz
+          key={crypto.randomUUID()}
+          question={question.question}
+          incorrectAnswers={question.incorrect_answers}
+          correctAnswer={question.correct_answer}
+        />
+        {index === questions.length - 1 && (
+          <button className="check-btn" onClick={checkAnswers} >Check answers</button>
+        )}
+      </React.Fragment>
+    );
+  });
 
   return (
     <main>
@@ -45,8 +61,7 @@ export default function App() {
 
       {/* render Game component on game start */}
       {gameStart && <div className="questions-container">{questionElements}</div>}           
-      {gameStart && <button className="check-btn" >Check answers</button>}
-      
+
       <img className="blob-two" src={blobTwo}/>
     </main>
   )

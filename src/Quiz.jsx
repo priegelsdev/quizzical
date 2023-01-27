@@ -58,9 +58,10 @@ export default function Quiz(props) {
     id: crypto.randomUUID()
   }))
 
-  // state for answers
+  // state for answers, so an isLogged property can be added to be toggled on and off when selected
   const [answers, setAnswers] = useState(answerArray)
 
+  //
   const answerElements = answers.map(answer => {
     const styles = {border: "none", backgroundColor: '#D6DBF5'}
 
